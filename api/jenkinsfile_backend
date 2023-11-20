@@ -44,7 +44,7 @@ pipeline {
          stage('Running the docker container') {
             steps {
                   sh 'docker container rm --force backend'
-                  sh 'docker run -d -p 8080:8080 --network lmsnetwork1-e DATABASE_URL=postgresql://postgres:password@lmsdb1:5432/postgres --name backend -e PORT=8080 -e MODE=local  irfanit/backend-lms'
+                  sh 'docker run -d -p 8080:8080 --network lmsnetwork1 -e DATABASE_URL=postgresql://postgres:password@lmsdb1:5432/postgres --name backend -e PORT=8080 -e MODE=local  irfanit/backend-lms'
             }
         }
     }
