@@ -32,9 +32,9 @@ pipeline {
          stage('Running the docker container') {
             steps {
                   sh 'docker container rm --force backend'
-		  sh 'docker network create -d bridge lmsnetwork'
-		  sh 'docker run -d -p 5432:5432 --network lmsnetwork -e POSTGRES_PASSWORD=password --name lmsdb postgres'
-                  sh 'docker run -d -p 8080:8080 --network lmsnetwork -e DATABASE_URL=postgresql://postgres:password@lmsdb:5432/postgres --name backend -e PORT=8080 -e MODE=local  irfanit/backend-lms'
+		  sh 'docker network create -d bridge lmsnetwork1'
+		  sh 'docker run -d -p 5432:5432 --network lmsnetwork1 -e POSTGRES_PASSWORD=password --name lmsdb1 postgres'
+                  sh 'docker run -d -p 8080:8080 --network lmsnetwork1 -e DATABASE_URL=postgresql://postgres:password@lmsdb:5432/postgres --name backend -e PORT=8080 -e MODE=local  irfanit/backend-lms'
             }
         }
     }
