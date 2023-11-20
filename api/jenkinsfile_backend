@@ -37,14 +37,14 @@ pipeline {
         }
          stage('creating database container') {
              steps {
-                 sh 'docker container rm --force lmsdb2'
-                 sh 'docker run -d -p 5432:5432 --network lmsnetwork2 -e  POSTGRES_PASSWORD=password --name lmsdb2 postgres'
+                 sh 'docker container rm --force lmsdb-1'
+                 sh 'docker run -d -p 5432:5432 --network lmsnetwork-1 -e  POSTGRES_PASSWORD=password --name lmsdb-1 postgres'
             }
         }
          stage('Running the docker container') {
             steps {
                   sh 'docker container rm --force backend'
-                  sh 'docker run -d -p 8080:8080 --network lmsnetwork2-e DATABASE_URL=postgresql://postgres:password@lmsdb2:5432/postgres --name backend -e PORT=8080 -e MODE=local  irfanit/backend-lms'
+                  sh 'docker run -d -p 8080:8080 --network lmsnetwork-1-e DATABASE_URL=postgresql://postgres:password@lmsdb:5432/postgres --name backend -e PORT=8080 -e MODE=local  irfanit/backend-lms'
             }
         }
     }
